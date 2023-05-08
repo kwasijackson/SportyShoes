@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>View Products</title>
+<link rel="stylesheet" type="text/css" th:href="@{/style.css}" />
+</head>
+<body>
+<div th:replace="fragments/header1 :: header"></div>
+<div class="container">
+
+
+ <div class="col-sm-12">  
+ <h3>My Orders</h3> 
+<table class="table table-hover table-responsive-xl">
+	<thead class="thead-light">
+	<tr>
+		<th>Bought By</th>
+		<th>Address</th>
+		<th>Contact</th>	
+		<th>Other Contact</th>
+		<th>Email</th>
+		<th>Product Name</th>
+		<th>Quantity</th>
+		<th>Price<th>
+		<th>Total</th> 
+		<th>Date Ordered</th>
+		<th>Category</th>
+	</tr>
+	</thead>
+    <tbody>
+	<tr th:each="orderList:${orders}">
+		<td th:text="${orderList.fullname}"></td>
+		<td th:text="${orderList.address}"></td>
+		<td th:text="${orderList.contactNumber}"></td>
+		<td th:text="${orderList.alternateContactNumber}"></td>
+		<td th:text="${{orderList.login}}"></td>
+		<td>
+		
+        <div th:each="product:${orderList.product}" th:text="${product.pname}"></div>
+		</td>
+		
+		<td th:text="${orderList.quantity}"></td>
+		<td>
+		<div th:each="product:${orderList.product}" th:text="${product.price}"></div>
+		</td>
+		
+		<td th:text="${orderList.orderAmount}" align="center"></td>
+		<td th:text="${orderList.orderplaced}"></td>
+		<td>
+		<div th:each="product:${orderList.product}" th:text="${product.category.getCategoryname()}"></div>
+		</td>
+		
+		
+	</tr>
+	</tbody>
+</table>
+</div>
+</div>
+
+<div th:replace="fragments/footer :: footer"></div>
+
+</body>
+</html>

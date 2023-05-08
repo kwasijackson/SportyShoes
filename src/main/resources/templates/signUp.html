@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+ <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0" />
+ <link rel="stylesheet" type="text/css" th:href="@{/style.css}" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+    integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+	crossorigin="anonymous">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Insert title here</title>
+</head>
+<body>
+<div class="container">
+<h2>Accout Create</h2>
+<form action="#" th:action="@{/signUp}" th:object="${login}" method="post">
+<label mb-3>EmailId</label>
+<input type="email" th:field="*{emailid}"/><br/>
+<label>Password</label>
+<input type="password" th:field="*{password}"/><br/>
+<label>Typeofuser</label><br/>
+<input type="radio"  value="admin" th:field="*{typeofuser}"/>Admin
+<input type="radio" value="customer" th:field="*{typeofuser}"/>Customer
+<br/>
+<input type="submit" value="SignIn"/>
+</form>
+</div>
+</body>
+</html>

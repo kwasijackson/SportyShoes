@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<link rel="stylesheet" type="text/css" th:href="@{/style.css}" />
+<title>View Category</title>
+</head>
+<body>
+<div class="container">
+<div th:replace="fragments/header :: header"></div>
+<table class="table table-hover table-responsive-xl">
+	<thead class="thead-light">
+	<tr>
+		<th>CategoryId</th>
+		<th>Category Name</th>
+		<th>Action</th>
+		
+	</tr>
+	 </thead>
+    <tbody>
+	<tr th:each="cc:${category}">
+		<td th:text="${cc.cid}"></td>
+		<td th:text="${cc.categoryname}"></td>
+		<td><a th:href="@{/category/edit/{cid} (cid=${cc.cid}) }" class="btn btn-primary" role="button" >Edit</a>
+		<a th:href="@{/category/delete/{cid} (cid=${cc.cid}) }" class="btn btn-danger" role="button" >Delete</a></td>
+	</tr>
+	  </tbody>
+</table>
+<br/>
+
+</div>
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

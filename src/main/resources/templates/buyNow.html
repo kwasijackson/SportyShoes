@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Check Out</title>
+<link rel="stylesheet" type="text/css" th:href="@{/style.css}" />
+
+</head>
+<body>
+
+<div class="container mt-5">
+  <div class="card p3" >
+  <div class="row" th:with="pid=${products.size()>1?0:products[0].pid}">
+    <div class="col-6">
+ 
+   
+    <form th:action="@{'/orders/save/' + ${pid}}" th:object="${orders}" method="post">
+    
+<label>Full Name</label>
+<input type="text" th:field="*{fullname}"/><br/>
+<label class="p-3">Address</label>
+<input type="text" th:field="*{address}"/><br/>
+<label class="p-3">Contact Number</label>
+<input type="text" th:field="*{contactNumber}"/><br/>
+<label>Alternate Contact Number</label>
+<input type="text" th:field="*{alternateContactNumber}"/><br/>
+
+<br/>
+
+<input type="submit" value="PlaceOrder" class="btn btn-primary" role="button"/>
+
+</form>
+    </div>
+   <div class="col-6">
+    <table class="table table-hover table-responsive-xl">
+	<thead class="thead-light">
+	<tr>
+		
+		<th>PName</th>
+		<th>Price</th>	
+		<th>Quantity</th>
+		<th>Total</th>
+		
+	</tr>
+	</thead>
+    <tbody>
+	<tr th:each="product:${products}">
+		
+		<td th:text="${product.pname}"></td>
+		<td th:text="${product.price}"></td>
+		<td>
+		<select>
+		<option value="1" selected>1</option>
+		<option value="2">2</option>
+		<option value="3">3</option>
+		<option value="4">4</option>
+		</select>
+		</td>
+		<td th:text="${product.price}"></td>
+     </tr>
+     <tr>
+     <td></td>
+     <td></td>
+     <td>Total</td>
+     <td th:text="${totalPrice}"></td>
+     </tr>
+     </tbody>
+    </table>
+    </div>
+
+        </div>
+     </div>
+
+   </div>
+
+
+
+</body>
+</html>

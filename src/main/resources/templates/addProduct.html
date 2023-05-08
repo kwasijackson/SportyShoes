@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link rel="stylesheet" type="text/css" th:href="@{/style.css}" />
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Add Product</title>
+</head>
+<body>
+<div class="container">
+<div th:replace="fragments/header :: header"></div>
+
+	<span th:text="${msg}"></span>
+	<h2 align="center">Add Product</h2>
+	<form th:action="@{/storeProductInfo}" th:object="${product}"  style="max-width: 550px; margin: 0 auto" method="post">
+	<input type="hidden" th:field="*{pid}" />
+	<div class="p-3">
+      <div class="form-group row">
+	<label class="col-sm-3 col-form-label" for="Productname" >Product Name</label>
+	<div class="col-sm-9">
+	<input type="text" th:field="*{pname}" required minlength="2" maxlength="128" class="form-control" /><br>
+        </div>
+     </div>
+    <div class="form-group row">
+	<label class="col-sm-3 col-form-label">Price</label>
+	<div class="col-sm-9">
+	<input type="number" th:field="*{price}" class="form-control" /> <br>
+	  </div>
+      </div>
+    <div class="form-group row">
+	<label class="col-sm-3 col-form-label">qty</label>
+	<div class="col-sm-9">
+	<input type="number"  step="1" th:field="*{qty}"  required min="1" class="form-control"/> <br>
+ </div>
+      </div>
+ <div class="form-group row">
+	<label class="col-sm-3 col-form-label">Category</label>
+	<div class="col-sm-9">
+	<select th:name="Category" class="form-control"> <br>
+		<option value="">--Select Category--</option>
+		<option th:each="cc:${category}" th:value="${cc.cid}">
+		<span th:text="${cc.categoryname}"></span>
+		</option>
+	</select>
+	</div>
+      </div>
+    <div class="form-group row">
+	<label class="col-sm-3 col-form-label">Product Image</label>
+	<div class="col-sm-9">
+	<input type="text" th:field="*{productimage}" class="form-control" /> <br>
+	</div>
+      </div>
+  
+<div class="text-center">
+   
+   <input type="submit" value="Save Product" class="btn btn-primary btn-sm mr-2" />
+        <input type="button" value="Cancel" id="btnCancel" class="btn btn-secondary btn-sm" />
+      </div>
+    </div>
+</form>
+</div>
+<div th:replace="fragments/footer :: footer"></div>
+
+</body>
+</html>

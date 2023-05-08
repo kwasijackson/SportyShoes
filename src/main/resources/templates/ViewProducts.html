@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>View Products</title>
+<link rel="stylesheet" type="text/css" th:href="@{/style.css}" />
+</head>
+<body>
+<div class="container">
+<div th:replace="fragments/header :: header"></div>
+
+<div class="row">
+    <div class="col-sm-3">
+      <h3>Categories</h3>
+      <table>
+      <tr th:each="cc:${category}">
+      <td><a th:href="@{/category/{Id} (Id=${cc.cid}) }"><span th:text="${cc.categoryname}"></span></a></td>
+      </tr>
+      
+      </table>
+    </div>
+ <div class="col-sm-9">  
+ <h3>Products</h3> 
+ <div class="my-3">
+  <form th:action="@{/ViewProducts}">
+    <div class="row d-flex">
+      <div class="col-md-8 mt-3">
+        <div class="search">
+         <input id="keyword" type="search" name="keyword" th:value="${keyword}"  class="form-control"
+            placeholder="Enter keyword">
+            <br>
+          <button type="submit" class="btn btn-secondary">Search</button>
+          <button id="btnClear" class="btn btn-info">Clear</button>
+        </div>
+      </div>
+           
+    </div>
+  </form>
+</div>
+<table class="table table-hover table-responsive-xl">
+	<thead class="thead-light">
+	<tr>
+		<th>PId</th>
+		<th>PName</th>
+		<th>Price</th>	
+		<th>Quantity</th>
+		<th>Image URL</th>
+		<th>Action</th>
+	</tr>
+	</thead>
+    <tbody>
+	<tr th:each="product:${products}">
+		<td th:text="${product.pid}"></td>
+		<td th:text="${product.pname}"></td>
+		<td th:text="${product.price}"></td>
+		<td th:text="${product.qty}"></td>
+		<td><img th:src="${product.productimage}" width="50px" height="50px"/></td>
+		<td><a th:href="@{/product/edit/{pid} (pid=${product.pid}) }" class="btn btn-primary" role="button" >Edit</a>
+		<a th:href="@{/product/delete/{pid} (pid=${product.pid}) }" class="btn btn-danger" role="button" >Delete</a>
+		</td>
+	</tr>
+	</tbody>
+</table>
+</div>
+</div>
+</div>
+<div th:replace="fragments/footer :: footer"></div>
+
+</body>
+</html>

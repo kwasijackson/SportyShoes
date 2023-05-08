@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Cart Items</title>
+<link rel="stylesheet" type="text/css" th:href="@{/style.css}" />
+</head>
+<body>
+<div class="container">
+<table class="table table-hover table-responsive-xl">
+	<thead class="thead-light">
+	<tr>
+		<th>CartId</th>
+		<th>Product Name</th>
+		<th>User</th>	
+		<th>Action</th>
+		
+	</tr>
+	</thead>
+    <tbody>
+	<tr th:each="cartItem:${products}">
+		<td th:text="${cartItem.cartId}"></td>
+		<td th:text="${cartItem.product.getPname()}"></td>
+		<td th:text="${cartItem.login.getEmailid()}"></td>
+		
+		<td><a th:href="@{/delete/{cartId} (cartId=${cartItem.cartId}) }" class="btn btn-warning" role="button" >Delete</a>
+				</td>
+	</tr>
+	</tbody>
+</table>
+
+</div>
+<div th:replace="fragments/footer :: footer"></div>
+
+</body>
+</html>
