@@ -1,5 +1,6 @@
 package com.repository;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -12,6 +13,6 @@ import com.bean.Login;
 @Repository
 public interface OrdersRepository extends JpaRepository<Orders, Integer>{
 	List<Orders> findByLogin(Login login);
-	List<Orders> findByOrderplacedBetween(Date start, Date end);
+	List<Orders> findByOrderplacedBetween(LocalDate startDate, LocalDate endDate);
 
 }

@@ -9,12 +9,14 @@ import java.util.stream.Collectors;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.bean.Cart;
@@ -26,6 +28,7 @@ import com.service.CartService;
 import com.service.LoginService;
 import com.service.OrdersService;
 import com.service.ProductService;
+import com.repository.OrdersRepository;
 
 @Controller
 public class OrdersController {
@@ -38,6 +41,8 @@ public class OrdersController {
 	LoginService loginService;
 	@Autowired
 	CartService cartservice;
+	@Autowired
+	OrdersRepository ordersRepository;
 
 	
 	@RequestMapping(value = "placeOrder/{pid}")
@@ -59,11 +64,19 @@ public class OrdersController {
 	}	
 	
 	@RequestMapping(value = "/ViewAllOrders",method = RequestMethod.GET)
-	public String viewAllOrders(Model mm, Orders orders) {
-		List<Orders> listOfOrders = ordersService.viewAllOrderDetails();
+	public String viewAllOrders(Model mm, Orders orders, @RequestParam(name = "start", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate startDate, @RequestParam(name = "end", required = false)@DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate endDate) {
+		
+		if (startDate != null && endDate != null) {
+
+			List<Orders> listOfOrders  = ordersRepository.findByOrderplacedBetween(startDate, endDate);
+			mm.addAttribute("orders", listOfOrders);
+		} else { List<Orders> listOfOrders = ordersService.viewAllOrderDetails();
 		System.out.println("AllOrders is " + listOfOrders);
 		mm.addAttribute("orders", listOfOrders);
-			
+				
+		}
+		
+				
 		return "ViewAllOrders";
 		
 		
